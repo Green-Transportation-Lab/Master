@@ -1,4 +1,5 @@
-class Generator: 
+class Generator:
+
 name = "" 
 cur_P_out = 0 #kW
 
