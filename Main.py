@@ -33,6 +33,7 @@ battery1.t = 1 #timestep in second
 
 # 3.1) Calling "description" Method
 # This Method will prints all the current "Fields" which are the State of the Battery
+
 battery1.description()
 
 # 3.2) Changing the properties and printing
