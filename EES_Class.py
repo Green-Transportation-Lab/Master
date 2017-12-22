@@ -51,7 +51,7 @@ class EES:
 
     def SOC_calc(self):
         self.cur_capacity = self.capacity
-        self.capacity = self.cur_capacity + self.power*self.t/3600
+        self.capacity = self.cur_capacity + self.power*self.timestep/3600
         self.SOC = self.capacity/self.n_capacity
 
     
