@@ -1,19 +1,20 @@
 # EES_Class
 
-
 class EES:
     name = ""
     capacity = 0 #kwh 
-    c_ready = 0 # 0 - not ready, 1 - ready
-    c_rate = 0
-    d_ready = 0 # 0 - not ready, 1 - ready
-    d_rate = 0
-    avg_temp = 25 #C
+    c_ready = 0 # 0 = not ready, 1 = ready
+    c_rate = 0 # kW
+    d_ready = 0 # 0 = not ready, 1 = ready
+    max_temp = 25 #C
     pack_voltage = 0
-    t = 1
-    cur_cap = 0
-    n_cap = 310
-     
+    timestep = 1
+    cur_capacity = 0
+    n_capacity = 310
+    current = 0 # Amps, positive for charging, negative for discharge
+    power = pack_voltage*current/1000 = 0 # kW, positive for charging, negative for discharging
+    
+        
     def description(self): #When called, this function enters defined values into a string
         print("EES Name = %s" % (self.name))
         print("SOC = %.2f" % (self.SOC))
@@ -26,18 +27,18 @@ class EES:
             print("Discharge Ready")
         else:
             print("Discharge Not Ready")
-        if self.c_rate > 0:
-            print("%s is charging at %d" % (self.name, self.c_rate))
-        if self.d_rate > 0:
-            print("%s is discharging at %d" % (self.name, self.d_rate))
-        print("%s Average Temperature is %d" %(self.name, self.avg_temp))
-        print("%s Pack Voltage is %d \n" % (self.name, self.pack_voltage))\
+        if self.power > 0:
+            print("%s is charging at %dkW" % (self.name, self.c_rate))
+        if self.power < 0:
+            print("%s is discharging at %dkW" % (self.name, self.d_rate))
+        print("%s Maximum Temperature is %d (Celcuis)" %(self.name, self.avg_temp))
+        print("%s Pack Voltage is %d \n" % (self.name, self.pack_voltage))
                   
         return 0
     
      #use max temp
     def temp_check(self):
-        if self.avg_temp > 30:
+        if self.max_temp > 30:
             self.c_ready = 0
             self.d_ready = 0
         return 0 # return some error code
@@ -49,9 +50,9 @@ class EES:
         return 0 # return some error code
 
     def SOC_calc(self):
-        self.cur_cap = self.capacity
-        self.capacity = self.cur_cap + self.c_rate*self.t/3600
-        self.SOC = self.capacity/self.n_cap
+        self.cur_capacity = self.capacity
+        self.capacity = self.cur_capacity + self.power*self.t/3600
+        self.SOC = self.capacity/self.n_capacity
 
     
     
