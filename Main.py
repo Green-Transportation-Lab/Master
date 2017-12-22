@@ -21,7 +21,7 @@ battery1.SOC = 0.45
 battery1.capacity = 200 #kWh
 battery1.avg_temp = 25 #degree C
 battery1.amp = 0.2 # Real Time Current in amps (Charging is -, Discharge is +)
-battery1.t = 1 #timestep in second
+battery1.timestep = 1 #timestep in second
 
 
 
@@ -39,7 +39,8 @@ battery1.description()
 # 3.2) Changing the properties and printing
 
 battery1.c_ready = 1 # it has been defiend in EES-Class
-battery1.amp = 90
+battery1.current = 90
+battery1.pack_voltage = 400
 
 battery1.description()
 
@@ -48,6 +49,6 @@ battery1.description()
 while battery1.SOC < .90:
     battery1.description()
     battery1.SOC_calc()
-    time.sleep(battery1.t)
+    time.sleep(battery1.timestep)
 
 
