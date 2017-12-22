@@ -17,7 +17,7 @@ class EES:
         
     def description(self): #When called, this function enters defined values into a string
         print("EES Name = %s" % (self.name))
-        print("SOC = %.2f" % (self.SOC))
+        print("SOC = %.4f" % (self.SOC))
         print("Capacity = %.2f" % (self.capacity))
         if self.c_ready == 1:
             print("Charge Ready")
